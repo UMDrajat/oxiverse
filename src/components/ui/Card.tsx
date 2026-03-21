@@ -25,6 +25,11 @@ export default function Card({ children, className = '', hover = true }: CardPro
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg'])
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
 
+  const spotlightBackground = useTransform(
+    [mouseXSpring, mouseYSpring],
+    ([xVal, yVal]) => `radial-gradient(400px circle at ${((xVal as number) + 0.5) * 100}% ${((yVal as number) + 0.5) * 100}%, rgba(96, 165, 250, 0.12), transparent)`
+  )
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!hover || !isDesktop) return
     const rect = e.currentTarget.getBoundingClientRect()
@@ -61,12 +66,7 @@ export default function Card({ children, className = '', hover = true }: CardPro
       {hover && isDesktop && (
         <motion.div 
           className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-          style={{
-            background: useTransform(
-              [mouseXSpring, mouseYSpring],
-              ([xVal, yVal]) => `radial-gradient(400px circle at ${((xVal as number) + 0.5) * 100}% ${((yVal as number) + 0.5) * 100}%, rgba(96, 165, 250, 0.12), transparent)`
-            )
-          }}
+          style={{ background: spotlightBackground }}
         />
       )}
 
