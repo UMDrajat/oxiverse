@@ -4,6 +4,8 @@ import { authOptions } from '@/lib/authOptions'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 // GET /api/blog - List all blog posts
 export async function GET(request: NextRequest) {
   try {
