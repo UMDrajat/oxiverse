@@ -41,7 +41,8 @@ npm install
    Open `.env` and add your credentials:
    
    ```env
-   DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres"
+   DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[PROJECT-REF].supabase.co:6543/postgres?pgbouncer=true"
+   DIRECT_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres"
    SUPABASE_URL="https://[PROJECT-REF].supabase.co"
    SUPABASE_ANON_KEY="[YOUR-ANON-KEY]"
    SUPABASE_SERVICE_ROLE_KEY="[YOUR-SERVICE-ROLE-KEY]"
