@@ -17,12 +17,21 @@ export async function saveFile(file: File, subDir: string = 'images'): Promise<S
   const fileExt = file.name.split('.').pop();
   const fileName = `${uuidv4()}.${fileExt}`;
   
-  // 1. Local Upload
-  const uploadDir = path.join(process.cwd(), 'public', 'uploads', subDir);
-  await fs.mkdir(uploadDir, { recursive: true });
-  const filePath = path.join(uploadDir, fileName);
-  await fs.writeFile(filePath, buffer);
-  const localUrl = `/uploads/${subDir}/${fileName}`;
+  // 1. Local Upload (Skip or fail gracefully in serverless/production)
+  let localUrl = `/uploads/${subDir}/${fileName}`;
+  const isVercel = process.env.VERCEL === '1';
+  
+  if (!isVercel) {
+    try {
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads', subDir);
+      await fs.mkdir(uploadDir, { recursive: true });
+      const filePath = path.join(uploadDir, fileName);
+      await fs.writeFile(filePath, buffer);
+    } catch (err) {
+      console.warn('Local filesystem write failed (likely EROFS):', err);
+      // In production/serverless, this is expected to fail. We proceed with Supabase.
+    }
+  }
 
   // 2. Supabase Upload (Backup)
   let supabaseUrl = null;
