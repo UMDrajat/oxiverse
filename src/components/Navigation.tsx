@@ -12,6 +12,7 @@ const navItems = [
   { name: 'Blog', href: '/#blog' },
   { name: 'Roadmap', href: '/#roadmap' },
   { name: 'Community', href: '/#community' },
+  { name: 'Contact', href: '/#contact' },
   { name: 'Docs', href: '/#docs' },
 ]
 
@@ -52,6 +53,8 @@ export default function Navigation() {
                 src="/favicon-256x256.png"
                 alt="Oxiverse Logo"
                 fill
+                priority
+                sizes="40px"
                 className="object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
               />
             </motion.div>
@@ -62,17 +65,23 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <Link
+            {navItems.map((item, idx) => (
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className="relative px-4 py-2 text-xs font-bold uppercase tracking-widest text-dark-300 hover:text-white transition-colors group"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
               >
-                {item.name}
-                <motion.span 
-                  className="absolute bottom-1 left-4 right-4 h-[2px] bg-primary-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"
-                />
-              </Link>
+                <Link
+                  href={item.href}
+                  className="relative px-4 py-2 text-xs font-bold uppercase tracking-widest text-dark-300 hover:text-white transition-colors group"
+                >
+                  {item.name}
+                  <motion.span 
+                    className="absolute bottom-1 left-4 right-4 h-[2px] bg-primary-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"
+                  />
+                </Link>
+              </motion.div>
             ))}
           </div>
 

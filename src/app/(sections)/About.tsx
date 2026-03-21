@@ -23,6 +23,7 @@ export default function About() {
                   src="https://avatars.githubusercontent.com/u/254577690?v=4"
                   alt="Likhith"
                   fill
+                  sizes="128px"
                   className="object-cover"
                 />
               </div>
@@ -59,28 +60,24 @@ export default function About() {
             </div>
           </div>
         </Card>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card className="text-center">
-            <div className="text-3xl font-bold font-display gradient-text mb-1">100%</div>
-            <div className="text-sm text-dark-400">Source Available</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          <Card className="text-center group border-beam">
+            <div className="text-4xl font-black font-display gradient-text mb-2 animate-pulse">100%</div>
+            <div className="text-xs font-black uppercase tracking-widest text-dark-400">Source Available</div>
           </Card>
-          <Card className="text-center">
-            <div className="text-3xl font-bold font-display gradient-text mb-1">0</div>
-            <div className="text-sm text-dark-400">User Tracking</div>
+          <Card className="text-center group border-beam">
+            <div className="text-4xl font-black font-display gradient-text mb-2 animate-pulse">0</div>
+            <div className="text-xs font-black uppercase tracking-widest text-dark-400">User Tracking</div>
           </Card>
-          <Card className="text-center">
-            <div className="text-3xl font-bold font-display gradient-text mb-1">24/7</div>
-            <div className="text-sm text-dark-400">Privacy First</div>
+          <Card className="text-center group border-beam">
+            <div className="text-4xl font-black font-display gradient-text mb-2 animate-pulse">24/7</div>
+            <div className="text-xs font-black uppercase tracking-widest text-dark-400">Privacy First</div>
           </Card>
-          <Card className="text-center">
-            <div className="text-3xl font-bold font-display gradient-text mb-1">∞</div>
-            <div className="text-sm text-dark-400">Possibilities</div>
+          <Card className="text-center group border-beam">
+            <div className="text-4xl font-black font-display gradient-text mb-2 animate-pulse">∞</div>
+            <div className="text-xs font-black uppercase tracking-widest text-dark-400">Possibilities</div>
           </Card>
         </div>
-
-        {/* Mission Statement */}
         <div className="mt-8 text-center">
           <blockquote className="text-xl md:text-2xl font-light italic text-dark-300 max-w-3xl mx-auto">
             "Technology should empower users, not exploit them. Every feature in Oxiverse is 

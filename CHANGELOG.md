@@ -4,6 +4,19 @@ All notable changes to the Oxiverse project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Added `Newsletter` model to Prisma schema for storing subscriber emails.
+- Created API endpoint `/api/newsletter` for processing subscriptions.
+- Implemented `Contact` section with social links for Instagram, GitHub, X, Reddit, and Telegram.
+- Added `image` field to `User` model for dynamic author avatars.
+
+### Changed
+- Refactored `Newsletter` component to use real API instead of simulation.
+- Cleaned up boilerplate in `Blog` and `Research` components, ensuring they only show database-driven content.
+- Updated `Blog` and `Research` detail pages to use dynamic author metadata and images from the database.
+- Removed hardcoded "Tutorial" and "Paper" badges in favor of dynamic categories.
+- Added `Contact` link to the main navigation.
+
+### Added
 - Created `directUrl` in `prisma/schema.prisma` mapping to the `DIRECT_URL` environment variable for handling migrations separately from the pooled connection environment.
 
 ### Changed

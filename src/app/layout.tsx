@@ -4,6 +4,7 @@ import './globals.css'
 import { ToastProvider } from '@/lib/providers/ToastProvider'
 import { AuthProvider } from '@/lib/providers/AuthProvider'
 import ScrollProgressBar from '@/components/ui/ScrollProgressBar'
+import { SmoothScrollProvider } from '@/lib/providers/SmoothScrollProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -49,7 +50,9 @@ export default function RootLayout({
         <div className={`${inter.className} ${spaceGrotesk.variable}`}>
           <AuthProvider>
             <ToastProvider>
-              {children}
+              <SmoothScrollProvider>
+                {children}
+              </SmoothScrollProvider>
             </ToastProvider>
           </AuthProvider>
         </div>

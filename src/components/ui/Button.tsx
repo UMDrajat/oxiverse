@@ -1,4 +1,8 @@
+'use client'
+
 import React from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 interface BaseButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
@@ -22,34 +26,60 @@ export default function Button({
   rel,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900'
+  const baseStyles = 'inline-flex items-center justify-center font-bold tracking-tight rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900 overflow-hidden relative group'
 
   const variants = {
-    primary: 'bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 shadow-lg shadow-primary-500/30',
-    secondary: 'bg-accent-600 hover:bg-accent-700 text-white focus:ring-accent-500 shadow-lg shadow-accent-500/30',
-    outline: 'border-2 border-primary-500 text-primary-400 hover:bg-primary-500/10 focus:ring-primary-500',
+    primary: 'bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 shadow-xl shadow-primary-500/20 border border-white/10',
+    secondary: 'bg-accent-600 hover:bg-accent-700 text-white focus:ring-accent-500 shadow-xl shadow-accent-500/20 border border-white/10',
+    outline: 'border-2 border-primary-500/30 text-primary-400 hover:text-white hover:border-primary-500/60 focus:ring-primary-500 glass',
     ghost: 'text-dark-300 hover:text-white hover:bg-white/5 focus:ring-dark-500',
   }
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-5 py-2.5 text-base',
-    lg: 'px-8 py-3.5 text-lg',
+    sm: 'px-4 py-2 text-xs uppercase tracking-widest',
+    md: 'px-6 py-3 text-sm uppercase tracking-[0.15em]',
+    lg: 'px-10 py-5 text-base uppercase tracking-[0.2em]',
   }
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`
 
-  if (href) {
-    return (
-      <a href={href} target={target} rel={rel} className={classes} {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
+  const content = (
+    <>
+      <span className="relative z-10 flex items-center">
         {children}
-      </a>
+      </span>
+      {/* Premium hover shine */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shine transition-transform duration-1000" />
+    </>
+  )
+
+  if (href) {
+    if (href.startsWith('/')) {
+      return (
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block">
+          <Link href={href} className={classes} {...(props as any)}>
+            {content}
+          </Link>
+        </motion.div>
+      )
+    }
+    return (
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block">
+        <a href={href} target={target} rel={rel} className={classes} {...(props as any)}>
+          {content}
+        </a>
+      </motion.div>
     )
   }
 
   return (
-    <button className={classes} {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}>
-      {children}
-    </button>
+    <motion.button 
+      whileHover={{ scale: 1.02 }} 
+      whileTap={{ scale: 0.98 }} 
+      className={classes} 
+      {...(props as any)}
+    >
+      {content}
+    </motion.button>
   )
 }

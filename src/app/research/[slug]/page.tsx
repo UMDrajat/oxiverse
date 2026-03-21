@@ -70,10 +70,10 @@ export default async function ResearchPaperPage({ params }: ResearchPaperPagePro
     where: { slug: params.slug },
     include: {
       author: {
-        select: { name: true, email: true },
+        select: { name: true, email: true, image: true },
       },
     },
-  })
+  }) as any
 
   if (!paper || !paper.published) {
     notFound()
@@ -118,14 +118,20 @@ export default async function ResearchPaperPage({ params }: ResearchPaperPagePro
               )}
               <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
                 <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20">
-                  <Image
-                    src="https://avatars.githubusercontent.com/u/254577690?v=4"
-                    alt="Likhith"
-                    fill
-                    className="object-cover"
-                  />
+                  {(paper.author as any).image ? (
+                    <Image
+                      src={(paper.author as any).image}
+                      alt={(paper.author as any).name || 'Author'}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-dark-700 flex items-center justify-center">
+                      <span className="text-xs text-white">{((paper.author as any).name || (paper.author as any).email).charAt(0)}</span>
+                    </div>
+                  )}
                 </div>
-                <span className="text-sm font-medium text-dark-200">{paper.author.name || paper.author.email}</span>
+                <span className="text-sm font-medium text-dark-200">{(paper.author as any).name || (paper.author as any).email}</span>
               </div>
             </div>
 

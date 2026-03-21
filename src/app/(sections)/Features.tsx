@@ -102,23 +102,23 @@ export default function Features() {
       />
       
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden mb-20 border border-white/10 shadow-2xl shadow-primary-500/10 group"
+        initial={{ opacity: 0, scale: 0.95, y: 30 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1, type: "spring", bounce: 0.3 }}
+        className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden mb-24 border border-white/10 shadow-2xl shadow-primary-500/10 group"
       >
         <Image
           src="/oxiverse-ecosystem-2.jpg"
           alt="Oxiverse Ecosystem"
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-950/95 via-dark-950/25 to-transparent" />
         
         {/* Decorative elements */}
-        <div className="absolute top-6 right-6 px-4 py-2 glass rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest text-primary-300">
+        <div className="absolute top-8 right-8 px-5 py-2.5 glass rounded-full border border-white/15 text-[11px] font-black uppercase tracking-[0.2em] text-primary-300 shadow-2xl">
           Live Ecosystem Visualization
         </div>
       </motion.div>
@@ -127,26 +127,29 @@ export default function Features() {
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
       >
         {features.map((feature) => (
           <motion.div key={feature.name} variants={item}>
-            <Card className="h-full group">
-              <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} mb-6 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-500`}>
-                <div className="text-white drop-shadow-md">
+            <Card className="h-full group border-beam">
+              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} mb-8 shadow-xl shadow-black/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                <div className="text-white drop-shadow-lg scale-110">
                   {feature.icon}
                 </div>
               </div>
-              <h3 className="text-2xl font-bold font-display text-white mb-3 group-hover:text-primary-400 transition-colors">
+              <h3 className="text-3xl font-bold font-display text-white mb-4 group-hover:text-primary-300 transition-colors tracking-tight">
                 {feature.name}
               </h3>
-              <p className="text-dark-400 leading-relaxed font-normal">
+              <p className="text-dark-300 leading-relaxed font-medium text-lg">
                 {feature.description}
               </p>
               
-              <div className="mt-8 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary-400">Learn More →</span>
+              <div className="mt-10 pt-8 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-primary-400 flex items-center group/btn cursor-pointer">
+                  Explore Module 
+                  <span className="ml-2 group-hover/btn:translate-x-2 transition-transform">→</span>
+                </span>
               </div>
             </Card>
           </motion.div>

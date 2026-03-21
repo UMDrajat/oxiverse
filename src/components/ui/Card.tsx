@@ -41,6 +41,9 @@ export default function Card({ children, className = '', hover = true }: CardPro
     <motion.div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       style={{
         rotateX: hover ? rotateX : 0,
         rotateY: hover ? rotateY : 0,
@@ -48,22 +51,25 @@ export default function Card({ children, className = '', hover = true }: CardPro
       }}
       className={`glass-card rounded-2xl p-8 relative overflow-hidden group ${className}`}
     >
-      <div style={{ transform: 'translateZ(50px)' }} className="relative z-10">
-        {children}
-      </div>
-      
-      {/* Dynamic Glow following mouse */}
+      {/* Background Spotlight */}
       {hover && (
         <motion.div 
           className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
           style={{
             background: useTransform(
               [mouseXSpring, mouseYSpring],
-              ([xVal, yVal]) => `radial-gradient(600px circle at ${((xVal as number) + 0.5) * 100}% ${((yVal as number) + 0.5) * 100}%, rgba(96, 165, 250, 0.15), transparent)`
+              ([xVal, yVal]) => `radial-gradient(400px circle at ${((xVal as number) + 0.5) * 100}% ${((yVal as number) + 0.5) * 100}%, rgba(96, 165, 250, 0.12), transparent)`
             )
           }}
         />
       )}
+
+      {/* Shine effect */}
+      <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-br from-white via-transparent to-transparent pointer-events-none" />
+
+      <div style={{ transform: 'translateZ(40px)' }} className="relative z-10">
+        {children}
+      </div>
     </motion.div>
   )
 }

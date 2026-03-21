@@ -8,30 +8,30 @@ import Counter from '@/components/ui/Counter'
 
 export default function Hero() {
   return (
-    <section id="platform" className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-dark-950 noise-bg">
+    <section id="platform" className="relative min-h-[95vh] flex items-center justify-center pt-28 overflow-hidden bg-dark-950 mesh-bg noise-bg">
       {/* Background Layers */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-dark-950 via-primary-950/20 to-dark-950" />
-        <div className="absolute inset-0 bg-grid-slate-900 bg-[size:50px_50px] opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-dark-950 via-primary-950/25 to-dark-950" />
+        <div className="absolute inset-0 bg-grid-white bg-[size:60px_60px] opacity-[0.03]" />
         
         {/* Animated Glow Orbs with Floating Motion */}
         <motion.div 
           animate={{ 
-            x: [0, 80, -40, 0],
-            y: [0, -40, 60, 0],
-            scale: [1, 1.1, 0.9, 1],
+            x: [0, 100, -60, 0],
+            y: [0, -60, 80, 0],
+            scale: [1, 1.2, 0.8, 1],
           }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-5%] w-[800px] h-[800px] bg-primary-600/10 rounded-full blur-[160px] opacity-30" 
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-15%] left-[-8%] w-[900px] h-[900px] bg-primary-500/15 rounded-full blur-[180px] opacity-40 mix-blend-screen" 
         />
         <motion.div 
           animate={{ 
-            x: [0, -60, 90, 0],
-            y: [0, 80, -30, 0],
-            scale: [0.9, 1, 1.1, 0.9],
+            x: [0, -80, 120, 0],
+            y: [0, 100, -50, 0],
+            scale: [0.8, 1.1, 1, 0.8],
           }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-15%] right-[-5%] w-[800px] h-[800px] bg-accent-600/10 rounded-full blur-[160px] opacity-30" 
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-20%] right-[-8%] w-[900px] h-[900px] bg-accent-500/15 rounded-full blur-[180px] opacity-40 mix-blend-screen" 
         />
       </div>
 
@@ -40,53 +40,53 @@ export default function Hero() {
         <motion.div 
           initial={{ opacity: 0, y: -20, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, type: "spring" }}
-          className="inline-flex items-center space-x-2 px-5 py-2 mb-10 glass rounded-full border border-white/10 shadow-xl shadow-primary-500/5 group cursor-default"
+          transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
+          className="inline-flex items-center space-x-2 px-6 py-2.5 mb-12 glass rounded-full border border-white/15 shadow-2xl shadow-primary-500/10 group cursor-default"
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-500 shadow-[0_0_10px_rgba(59,130,246,1)]"></span>
           </span>
-          <span className="text-xs font-bold tracking-widest uppercase text-primary-300 group-hover:text-primary-100 transition-colors">System Status: Public Beta</span>
+          <span className="text-[11px] font-black tracking-[0.2em] uppercase text-primary-200 group-hover:text-white transition-colors">OS System: Public Beta 2.0</span>
         </motion.div>
 
         {/* Gradient Headline */}
         <motion.h1 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.1, type: "spring" }}
-          className="text-6xl md:text-8xl lg:text-9xl font-bold font-display tracking-tighter mb-8"
+          initial={{ opacity: 0, scale: 0.9, y: 40 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.2, type: "spring" }}
+          className="text-7xl md:text-9xl lg:text-[10rem] font-bold font-display tracking-tighter mb-10 leading-[0.9]"
         >
-          <span className="gradient-text block mb-2 leading-tight">Explore.</span>
-          <span className="text-white block mb-2 leading-tight text-glow">Connect.</span>
-          <span className="gradient-text block leading-tight">Create.</span>
+          <span className="gradient-text block mb-4">Explore.</span>
+          <span className="text-white block mb-4 text-glow">Connect.</span>
+          <span className="gradient-text block">Create.</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, type: "spring" }}
-          className="text-lg md:text-xl text-dark-300 max-w-2xl mx-auto mb-12 leading-relaxed font-medium"
+          transition={{ duration: 1.2, delay: 0.4, type: "spring" }}
+          className="text-xl md:text-2xl text-dark-300 max-w-3xl mx-auto mb-16 leading-relaxed font-medium"
         >
           The next generation of privacy-first infrastructure. 
-          A secure ecosystem for developers and pioneers of the open internet.
+          A secure, decentralized ecosystem for pioneers of the open internet.
         </motion.p>
 
         {/* CTAs */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5, type: "spring" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24"
+          transition={{ duration: 1.2, delay: 0.6, type: "spring" }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-24"
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button size="lg" href="https://github.com/itxLikhith" target="_blank" className="min-w-[200px] shadow-2xl shadow-primary-500/40 relative overflow-hidden group">
-              <span className="relative z-10">Build with Us</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Button size="lg" href="https://github.com/itxLikhith" target="_blank" className="min-w-[220px] h-16 text-lg shadow-2xl shadow-primary-500/40 relative overflow-hidden group rounded-2xl">
+              <span className="relative z-10">Build the Future</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-[length:200%_100%] animate-gradient-shift opacity-0 group-hover:opacity-100 transition-opacity" />
             </Button>
           </motion.div>
           
@@ -94,13 +94,12 @@ export default function Hero() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button size="lg" variant="outline" href="#products" className="min-w-[200px] glass relative overflow-hidden group">
-              <span className="relative z-10">View Ecosystem</span>
+            <Button size="lg" variant="outline" href="#products" className="min-w-[220px] h-16 text-lg glass relative overflow-hidden group rounded-2xl border-white/10 hover:border-white/20">
+              <span className="relative z-10 text-white">Explore Ecosystem</span>
               <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Button>
           </motion.div>
         </motion.div>
-
       </div>
 
       {/* Modern Scroll Indicator */}

@@ -13,7 +13,7 @@ export default async function Research() {
   try {
     papers = await prisma.researchPaper.findMany({
       where: { published: true },
-      include: { author: true },
+      include: { author: true, category: true },
       orderBy: { publishedAt: 'desc' },
       take: 2,
     })
@@ -25,7 +25,9 @@ export default async function Research() {
     slug: paper.slug,
     title: paper.title,
     excerpt: paper.abstract,
+    category: paper.category?.name,
     author: paper.author.name || paper.author.email,
+    authorImage: paper.author.image,
     date: formatDate(paper.publishedAt || paper.createdAt),
     image: paper.imageUrl,
     imageDisplay: paper.imageDisplay,
@@ -65,7 +67,9 @@ export default async function Research() {
 
                   <div className="flex-1 p-8 flex flex-col">
                     <div className="flex items-center gap-3 mb-4">
-                      <Badge variant="success" size="sm" className="bg-accent-500/10 text-accent-400 border-accent-500/20">Paper</Badge>
+                      {paper.category && (
+                        <Badge variant="success" size="sm" className="bg-accent-500/10 text-accent-400 border-accent-500/20">{paper.category}</Badge>
+                      )}
                       <span className="text-[10px] font-bold text-dark-500 uppercase tracking-widest">{paper.date}</span>
                     </div>
                     
@@ -80,12 +84,18 @@ export default async function Research() {
                     <div className="mt-auto flex items-center justify-between">
                       <div className="flex items-center gap-2">
                          <div className="w-5 h-5 rounded-full overflow-hidden relative grayscale opacity-70">
-                          <Image
-                            src="https://avatars.githubusercontent.com/u/254577690?v=4"
-                            alt="Likhith"
-                            fill
-                            className="object-cover"
-                          />
+                          {paper.authorImage ? (
+                            <Image
+                              src={paper.authorImage}
+                              alt={paper.author}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-dark-700 flex items-center justify-center">
+                              <span className="text-[8px] text-white">{paper.author.charAt(0)}</span>
+                            </div>
+                          )}
                         </div>
                         <span className="text-xs font-medium text-dark-400">{paper.author}</span>
                       </div>

@@ -46,6 +46,7 @@ export default function Footer() {
                   src="/favicon-128x128.png"
                   alt="Oxiverse Logo"
                   fill
+                  sizes="40px"
                   className="object-contain"
                 />
               </div>

@@ -193,7 +193,7 @@ git init
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/yourusername/oxiverse-home.git
+git remote add origin https://github.com/itxLikhith/oxiverse.git
 git push -u origin main
 ```
 

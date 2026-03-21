@@ -68,6 +68,7 @@ export default async function ResearchPage() {
                             src={paper.imageUrl}
                             alt={paper.title}
                             fill
+                            sizes="(max-width: 768px) 100vw, 256px"
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
@@ -106,6 +107,7 @@ export default async function ResearchPage() {
                                 src="https://avatars.githubusercontent.com/u/254577690?v=4"
                                 alt="Likhith"
                                 fill
+                                sizes="20px"
                                 className="object-cover"
                               />
                             </div>

@@ -67,6 +67,7 @@ export default async function BlogPage() {
                           src={blog.imageUrl}
                           alt={blog.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                       </div>
@@ -97,6 +98,7 @@ export default async function BlogPage() {
                             src="https://avatars.githubusercontent.com/u/254577690?v=4"
                             alt="Likhith"
                             fill
+                            sizes="24px"
                             className="object-cover"
                           />
                         </div>

@@ -14,7 +14,7 @@ export default async function Blog() {
   try {
     blogs = await prisma.blog.findMany({
       where: { published: true },
-      include: { author: true },
+      include: { author: true, category: true },
       orderBy: { publishedAt: 'desc' },
       take: 4,
     })
@@ -28,7 +28,9 @@ export default async function Blog() {
     slug: blog.slug,
     title: blog.title,
     excerpt: blog.excerpt,
+    category: blog.category?.name,
     author: blog.author.name || blog.author.email,
+    authorImage: blog.author.image,
     date: formatDate(blog.publishedAt || blog.createdAt),
     image: blog.imageUrl,
     imageDisplay: blog.imageDisplay,
@@ -63,9 +65,11 @@ export default async function Blog() {
                         <span className="text-dark-600 font-bold text-4xl">O</span>
                       </div>
                     )}
-                    <div className="absolute top-3 left-3">
-                      <Badge variant="default" size="sm" className="bg-primary-500/20 text-primary-300 backdrop-blur-md">Tutorial</Badge>
-                    </div>
+                    {post.category && (
+                      <div className="absolute top-3 left-3">
+                        <Badge variant="default" size="sm" className="bg-primary-500/20 text-primary-300 backdrop-blur-md">{post.category}</Badge>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="p-6 flex flex-col flex-1">
@@ -80,12 +84,18 @@ export default async function Blog() {
                     <div className="flex items-center justify-between text-[11px] font-bold text-dark-500 uppercase tracking-widest pt-4 border-t border-white/5">
                       <span className="flex items-center gap-2">
                          <div className="w-4 h-4 rounded-full overflow-hidden relative grayscale opacity-70">
-                          <Image
-                            src="https://avatars.githubusercontent.com/u/254577690?v=4"
-                            alt="Likhith"
-                            fill
-                            className="object-cover"
-                          />
+                          {post.authorImage ? (
+                            <Image
+                              src={post.authorImage}
+                              alt={post.author}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-dark-700 flex items-center justify-center">
+                              <span className="text-[8px] text-white">{post.author.charAt(0)}</span>
+                            </div>
+                          )}
                         </div>
                         {post.author}
                       </span>
