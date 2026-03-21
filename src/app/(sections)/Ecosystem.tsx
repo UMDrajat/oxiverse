@@ -1,0 +1,88 @@
+import React from 'react'
+import Section from '@/components/ui/Section'
+import SectionHeader from '@/components/ui/SectionHeader'
+import Card from '@/components/ui/Card'
+import Badge from '@/components/ui/Badge'
+import Button from '@/components/ui/Button'
+import { prisma } from '@/lib/prisma'
+import Link from 'next/link'
+
+export default async function Ecosystem() {
+  let projects: any[] = []
+  try {
+    projects = await prisma.project.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 6,
+    })
+  } catch (err) {
+    console.error('Ecosystem component fetch fail:', err)
+  }
+
+  return (
+    <Section id="ecosystem" dark>
+      <SectionHeader
+        badge="Ecosystem"
+        title="The Oxiverse Network"
+        subtitle="Explore the growing ecosystem of products and projects built on our privacy-first infrastructure."
+      />
+      
+      {projects.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <Card key={project.id} className="group hover:border-primary-500/50 transition-all duration-300 bg-white/[0.02] border-white/5">
+              <div className="p-6 flex flex-col h-full">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500/20 to-primary-600/10 flex items-center justify-center text-primary-400 font-bold text-xl overflow-hidden relative">
+                    {project.imageUrl ? (
+                      <img src={project.imageUrl} alt={project.title} className={`w-full h-full object-${project.imageDisplay || 'cover'} ${project.imageDisplay === 'contain' ? 'p-1' : ''}`} />
+                    ) : (
+                      project.title.charAt(0)
+                    )}
+                  </div>
+                  {project.status && (
+                    <Badge variant={project.status === 'current' ? 'success' : 'default'} size="sm" className="capitalize">
+                      {project.status}
+                    </Badge>
+                  )}
+                </div>
+                
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors">
+                  {project.title}
+                </h3>
+                
+                <p className="text-dark-400 text-sm mb-6 flex-1 leading-relaxed">
+                  {project.description}
+                </p>
+                
+                {project.link && (
+                  <div className="mt-auto">
+                    <Link 
+                      href={project.link} 
+                      target="_blank" 
+                      className="text-xs font-bold text-primary-400 uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all"
+                    >
+                      View Project
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-16 bg-white/[0.02] border border-dashed border-white/10 rounded-2xl">
+          <p className="text-dark-500 text-lg">No ecosystem products yet.</p>
+        </div>
+      )}
+
+      <div className="text-center mt-12">
+        <Button href="/ecosystem" variant="outline" className="glass">
+          Explore Full Ecosystem
+        </Button>
+      </div>
+    </Section>
+  )
+}
