@@ -9,6 +9,8 @@ import Blog from '@/app/(sections)/Blog'
 import About from '@/app/(sections)/About'
 import Footer from '@/components/Footer'
 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-dark-950">
